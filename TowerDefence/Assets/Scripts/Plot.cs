@@ -31,6 +31,15 @@ public class plot : MonoBehaviour
         if (tower != null) return;
 
         Tower towerToBuild = BuildManager.Instance.GetSelectedTower();
+
+        if (towerToBuild.cost > LevelManager.instance.currency)
+        {
+            Debug.Log("Você não pode comprar esta torre ");                    
+            return;
+        }
+
+        LevelManager.instance.SpendCurrency(towerToBuild.cost);
+
         tower = Instantiate(towerToBuild.prefab, transform.position, Quaternion.identity);
     }
 

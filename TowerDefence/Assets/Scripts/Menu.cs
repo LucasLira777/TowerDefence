@@ -14,7 +14,10 @@ public class Menu : MonoBehaviour
 
     }
 
+    public void SetSelected()
+    {
 
+    }
 
 
 
