@@ -102,7 +102,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   targetingRange: 5
-  aps: 4
+  aps: 1
   freezeTime: 1
 --- !u!1 &6625388091638086606
 GameObject:
