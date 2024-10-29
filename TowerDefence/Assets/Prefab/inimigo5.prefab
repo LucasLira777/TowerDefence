@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 5699485187126121140}
   - component: {fileID: 2800042237831371349}
   - component: {fileID: 8397333150627785557}
-  m_Layer: 0
+  - component: {fileID: 1456565352414629686}
+  m_Layer: 6
   m_Name: inimigo5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,3 +164,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &1456565352414629686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2466151601380866728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b33112af23aedb4792032012f780824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitPoints: 1
+  currencyWorth: 50

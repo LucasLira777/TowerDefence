@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 7153906123741055984}
   - component: {fileID: 5749382416370757214}
   - component: {fileID: 4611958846305138585}
-  m_Layer: 0
+  - component: {fileID: -3314909563936816126}
+  m_Layer: 6
   m_Name: Inimigo2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 4611958846305138585}
-  moveSpeed: 5
+  moveSpeed: 2
 --- !u!50 &4611958846305138585
 Rigidbody2D:
   serializedVersion: 4
@@ -163,3 +164,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &-3314909563936816126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3812240321291531213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b33112af23aedb4792032012f780824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitPoints: 4
+  currencyWorth: 50
