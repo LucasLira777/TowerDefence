@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using static UnityEditor.Progress;
 
 public class Turret : MonoBehaviour
 {
@@ -65,6 +66,11 @@ public class Turret : MonoBehaviour
         return Vector2.Distance(target.position, transform.position) <= targetingRange;
     }
 
-
+    private void OnDrawGizmosSelected()
+    {
+        Handles.color = Color.blue;
+        Handles.DrawWireDisc(transform.position, transform.forward, targetingRange);
+    }
+   
 
 }

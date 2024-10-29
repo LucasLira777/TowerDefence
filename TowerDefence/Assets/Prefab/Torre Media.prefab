@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 369456067653097167}
   - component: {fileID: 7125288968145225033}
-  - component: {fileID: 7335334041332802149}
+  - component: {fileID: 8878946768457570663}
   m_Layer: 0
   m_Name: Torre Media
   m_TagString: Untagged
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7335334041332802149
+--- !u!114 &8878946768457570663
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,16 +95,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4025013127541139378}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f1c51b6eee0977479da53cb827c8984, type: 3}
+  m_Script: {fileID: 11500000, guid: a8e1c29f955785c43a241613dcd4268f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
-  bulletprefab: {fileID: 2402539799139120560, guid: b0280865fd161304bbdeac6c74de7d30, type: 3}
-  firingpoint: {fileID: 5926827120720276026}
-  targetingRange: 15
-  bps: 1
+  targetingRange: 5
+  aps: 1
+  freezeTime: 1
 --- !u!1 &6625388091638086606
 GameObject:
   m_ObjectHideFlags: 0
