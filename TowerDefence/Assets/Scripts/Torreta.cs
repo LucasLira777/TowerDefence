@@ -73,10 +73,5 @@ public class Turret : MonoBehaviour
         return Vector2.Distance(target.position, transform.position) <= targetingRange;
     }
 
-    // Desenha uma esfera no editor para visualizar o alcance da torre
-    private void OnDrawGizmosSelected()
-    {
-        Handles.color = Color.blue;
-        Handles.DrawWireDisc(transform.position, transform.forward, targetingRange);
-    }
+    
 }
