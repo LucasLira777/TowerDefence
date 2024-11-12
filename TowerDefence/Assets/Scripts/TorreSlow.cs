@@ -12,27 +12,26 @@ public class TorreSlow : MonoBehaviour
 
     // Atributos da torre
     [Header("Attributes")]
-    [SerializeField] private float targetingRange = 5f; // Alcance dentro do qual a torre aplica lentidão nos inimigos
-    [SerializeField] private float aps = 4f; // Ataques por segundo (quantidade de vezes que a torre tentará aplicar lentidão nos inimigos em um segundo)
-    [SerializeField] private float slowAmount = 0.5f; // Percentual de redução da velocidade do inimigo (0.5f = 50% de redução)
-    [SerializeField] private float slowDuration = 1f; // Duração do efeito de lentidão nos inimigos
+    [SerializeField] private float targetingRange = 5f; // Alcance dentro do qual a torre pode congelar inimigos
+    [SerializeField] private float aps = 4f; // Ataques por segundo (quantidade de vezes que a torre tentará congelar inimigos em um segundo)
+    [SerializeField] private float freezeTime = 1f; // Duração do congelamento dos inimigos em segundos
 
-    private float timeUntilFire; // Tempo acumulado até o próximo efeito de lentidão
+    private float timeuntilfire; // Tempo acumulado até o próximo ataque
 
     private void Update()
     {
-        // Acumula o tempo até o próximo efeito de lentidão
-        timeUntilFire += Time.deltaTime;
+        // Acumula o tempo até o próximo ataque
+        timeuntilfire += Time.deltaTime;
 
-        // Verifica se é hora de aplicar o efeito de lentidão
-        if (timeUntilFire >= 1f / aps)
+        // Verifica se é hora de atacar (congelar inimigos)
+        if (timeuntilfire >= 1f / aps)
         {
-            ApplySlowEffect(); // Chama o método para aplicar o efeito de lentidão nos inimigos
-            timeUntilFire = 0f; // Reseta o tempo acumulado após o efeito de lentidão
+            FreezeEnemies(); // Chama o método para congelar inimigos
+            timeuntilfire = 0f; // Reseta o tempo acumulado após o ataque
         }
     }
 
-    private void ApplySlowEffect()
+    private void FreezeEnemies()
     {
         // Realiza um CircleCast para detectar inimigos dentro do alcance
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, targetingRange, Vector2.zero, 0f, enemyMask);
@@ -41,31 +40,30 @@ public class TorreSlow : MonoBehaviour
         if (hits.Length > 0)
         {
             // Itera sobre todos os inimigos detectados
-            foreach (RaycastHit2D hit in hits)
+            for (int i = 0; i < hits.Length; i++)
             {
+                RaycastHit2D hit = hits[i];
+
                 // Obtém o componente EnemyMovement do inimigo
                 EnemyMovement em = hit.transform.GetComponent<EnemyMovement>();
+                // Reduz a velocidade do inimigo para congelá-lo
+                em.UpdateSpeed(0.5f);
 
-                if (em != null && !em.IsSlowed) // Aplica lentidão apenas se o inimigo ainda não estiver lento
-                {
-                    em.UpdateSpeed(slowAmount); // Reduz a velocidade do inimigo
-
-                    // Inicia uma coroutine para restaurar a velocidade após o tempo de lentidão
-                    StartCoroutine(RemoveSlowEffect(em));
-                }
+                // Inicia uma coroutine para restaurar a velocidade após o tempo de congelamento
+                StartCoroutine(ResetEnemySpeed(em));
             }
         }
     }
 
-    // Coroutine para restaurar a velocidade do inimigo após o tempo de lentidão
-    private IEnumerator RemoveSlowEffect(EnemyMovement em)
+    // Coroutine para restaurar a velocidade do inimigo após o tempo de congelamento
+    private IEnumerator ResetEnemySpeed(EnemyMovement em)
     {
-        // Aguarda o tempo de lentidão
-        yield return new WaitForSeconds(slowDuration);
-
+        // Aguarda o tempo de congelamento
+        yield return new WaitForSeconds(freezeTime);
         // Restaura a velocidade original do inimigo
         em.ResetSpeed();
     }
+
 
 
 }
