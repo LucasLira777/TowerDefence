@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
- 
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] enemyPrefabs; // Array de prefabs de inimigos que podem ser instanciados
@@ -21,6 +20,9 @@ public class EnemySpawner : MonoBehaviour
     private int enemiesLeftToSpawn; // Contador de inimigos restantes para spawn na onda atual
     private float eps; // Inimigos por segundo ajustado para a onda atual
     private bool isSpawning = false; // Indica se os inimigos estão sendo gerados
+
+    // Lista para armazenar os inimigos instanciados
+    private List<GameObject> activeEnemies = new List<GameObject>();
 
     private void Awake()
     {
@@ -86,6 +88,9 @@ public class EnemySpawner : MonoBehaviour
         timeSinceLastSpawn = 0f;
         currentWave++; // Incrementa o número da onda
         StartCoroutine(StartWave()); // Inicia a próxima onda
+
+        // Limpa a lista de inimigos ativos da onda atual
+        activeEnemies.Clear();
     }
 
     private void SpawnEnemy()
@@ -93,7 +98,10 @@ public class EnemySpawner : MonoBehaviour
         // Escolhe aleatoriamente um inimigo para spawn e o instancia no ponto de partida
         int index = Random.Range(0, enemyPrefabs.Length);
         GameObject prefabToSpawn = enemyPrefabs[index];
-        Instantiate(prefabToSpawn, LevelManager.instance.startPoint.position, Quaternion.identity);
+        GameObject newEnemy = Instantiate(prefabToSpawn, LevelManager.instance.startPoint.position, Quaternion.identity);
+
+        // Adiciona o inimigo instanciado à lista
+        activeEnemies.Add(newEnemy);
     }
 
     private float EnemiesPerSecond()
@@ -102,5 +110,3 @@ public class EnemySpawner : MonoBehaviour
         return Mathf.Clamp(enemiesPerSecond * Mathf.Pow(currentWave, difficultyScalingFactor), 0f, enemiesPerSecondCap);
     }
 }
-
- 
